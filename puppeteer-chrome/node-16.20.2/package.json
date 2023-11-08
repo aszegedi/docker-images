@@ -1,0 +1,16 @@
+{
+  "name": "cloudbreak-browser-testing",
+  "description": "Cloudbreak UI Testing",
+  "version": "1.0.0",
+  "author": "Cloudera Inc. (https://cloudera.com)",
+  "license": "MIT",
+  "keywords": [
+    "puppeteer",
+    "testing",
+    "integration testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hortonworks/hortonworks-cloud.git"
+  }
+}

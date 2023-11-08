@@ -1,6 +1,9 @@
 FROM node:14.17.6-alpine3.14
 
+ARG TARGETPLATFORM
+ARG TARGETOS
 ARG TARGETARCH
+ARG TARGETVARIANT
 
 # Set up glibc
 ENV LANG en_US.UTF-8
@@ -57,5 +60,24 @@ RUN apk add --no-cache --update \
 ENV CHROME_BIN=/usr/bin/chromium-browser \
     CHROME_PATH=/usr/lib/chromium/
 
+# reduce the number of NPM install messages
+ENV npm_config_loglevel=warn
+# allow installing when the main user is root
+ENV npm_config_unsafe_perm=true
 # Install puppeteer so it's available in the container.
 RUN npm i puppeteer
+
+RUN npm --version \
+  && npm install -g yarn@latest --force \
+  && yarn --version \
+  && node -p process.versions \
+  && node -p 'module.paths' \
+  && echo  " node version:    $(node -v) \n" \
+    "npm version:     $(npm -v) \n" \
+    "yarn version:    $(yarn -v) \n" \
+    "debian version:  $(cat /etc/debian_version) \n" \
+    "user:            $(whoami) \n" \
+    "architecture:    $TARGETARCH \n" \
+    "os component:    $TARGETOS \n" \
+    "architecture:    $TARGETVARIANT \n" \
+    "platform:        $TARGETPLATFORM \n"
