@@ -10,8 +10,8 @@ RUN apt-get update -qqy && \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64 && \
-    chmod +x /usr/local/bin/dumb-init
+RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_$TARGETARCH.deb && \
+    dpkg -i dumb-init_*.deb
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["echo", "run this container with command like 'yarn install'"]
