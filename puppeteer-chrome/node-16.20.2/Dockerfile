@@ -1,6 +1,9 @@
 FROM node:16.20.2-slim
 
 ARG TARGETARCH
+ARG TARGETOS
+ARG TARGETVARIANT
+ARG TARGETPLATFORM
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -102,8 +105,6 @@ RUN npm --version \
     "debian version:  $(cat /etc/debian_version) \n" \
     "user:            $(whoami) \n" \
     "chrome version:  $(google-chrome --version) \n" \
-    "firefox version: $(firefox --version) \n" \
-    "edge version:    $(edge --version) \n" \
     "architecture:    $TARGETARCH \n" \
     "os component:    $TARGETOS \n" \
     "architecture:    $TARGETVARIANT \n" \
